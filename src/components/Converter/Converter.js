@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import styles from './Converter.module.css';
 import Card from '../Card/Card';
+import CurrencySelect from '../CurrencySelect/CurrencySelect';
 
 class Converter extends Component {
+
+  state = {
+    currencies: []
+  }
+
+  componentDidMount = () => {
+    fetch('https://free.currencyconverterapi.com/api/v5/currencies?')
+      .then(res => res.json())
+      .then(data => {
+        const currencies = [];
+        for(const key in data.results) {
+          currencies.push(data.results[key]);
+        }
+        this.setState({ currencies });
+      })
+      .catch(console.error);
+  }
+
  render() {
+
   return (
     <Card>
       <form className={styles.converterGrid}>
@@ -13,10 +33,11 @@ class Converter extends Component {
           type="number" defaultValue="1"
           min="1"
         />
-        <div className={styles.fromCurrency}>
-          <label htmlFor="fromCurrency">From</label>
-          <select name="fromCurrency" id="fromCurrency"></select>
-        </div>
+        <CurrencySelect
+          currencies={this.state.currencies}
+          value="USD"
+          className={styles.fromCurrency}
+          name="fromCurrency" />
         <button
           type="button"
           aria-label="swap"
@@ -24,10 +45,11 @@ class Converter extends Component {
         >
           ⮀
         </button>
-        <div className={styles.toCurrency}>
-          <label htmlFor="toCurrency">To</label>
-          <select name="toCurrency" id="toCurrency"></select>
-        </div>
+        <CurrencySelect
+          currencies={this.state.currencies}
+          value="EUR"
+          className={styles.toCurrency}
+          name="toCurrency" />
         <button className={styles.convertButton} type="button">convert</button>
       </form>
     </Card>);
