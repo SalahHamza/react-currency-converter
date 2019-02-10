@@ -1,0 +1,10 @@
+.eightyContainer {
+  width: 96%;
+  transition: width 0.3s ease;
+}
+
+@media screen and (min-width: 600px) {
+  .eightyContainer {
+    width: 80%;
+  }
+}

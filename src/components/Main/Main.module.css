@@ -1,0 +1,9 @@
+.main {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+
+.innerContainer {
+  composes: eightyContainer from "../Shared/Container.module.css";
+}

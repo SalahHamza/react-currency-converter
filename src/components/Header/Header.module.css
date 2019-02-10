@@ -1,0 +1,25 @@
+.header {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+}
+
+.innerContainer {
+  composes: eightyContainer from "../Shared/Container.module.css";
+  border-bottom: 1px solid #94a0bb;
+  height: 70px;
+}
+
+.appName {
+  text-align: center;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  color: #eaecf1;
+}
+
+@media screen and (min-width: 600px) {
+  .appName {
+    text-align: left;
+    font-size: 2em;
+  }
+}
