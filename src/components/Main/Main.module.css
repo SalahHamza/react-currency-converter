@@ -1,9 +1,11 @@
 .main {
-  display: flex;
-  flex-flow: column nowrap;
+  width: 100%;
 }
-
 
 .innerContainer {
   composes: eightyContainer from "../Shared/Container.module.css";
+  margin: 30px auto 0;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }

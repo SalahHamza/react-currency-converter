@@ -1,0 +1,83 @@
+.converterGrid {
+  display: grid;
+	grid-template-columns: 3fr 1fr 3fr;
+	grid-template-rows: 1fr 1fr 1.2fr;
+	grid-template-areas:
+		"amount amount amount"
+		"c-from  exchange	 c-to"
+		"convert  convert  convert";
+	grid-row-gap: 16px;
+	grid-column-gap: 10px;
+}
+
+@media screen and (max-width: 480px){
+	.converterGrid {
+		grid-row-gap: 8px;
+		grid-column-gap: 0;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 1fr 1fr 1fr 1.2fr;
+		grid-template-areas:
+			"amount" "c-from"
+			"exchange" "c-to"
+			"convert";
+	}
+}
+
+
+.amount {
+	grid-area: amount;
+	border: 1px solid #ccc;
+	padding: 8px 16px;
+	border-radius: 2px;
+	width: 100%;
+}
+
+
+.fromCurrency {
+	grid-area: c-from;
+}
+
+.toCurrency {
+	grid-area: c-to;
+}
+
+.fromCurrency,
+.toCurrency {
+	display: flex;
+	flex-direction: row;
+}
+
+
+.fromCurrency label,
+.toCurrency label{
+	line-height: 2.25;
+	text-align: center;
+	min-width: 50px;
+	display: block;
+	background-color: #223843;
+	color: white;
+	border-radius: 2px 0 0 2px;
+}
+
+.toCurrency select,
+.fromCurrency select {
+	flex-grow: 1;
+  padding: 11px 16px;
+	background-size: 12px;
+  -webkit-appearance: none;
+	-moz-appearance: none;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+.convertButton {
+  composes: button from "../Shared/Button.module.css";
+  grid-area: convert;
+}
+
+.exchange {
+  composes: button from "../Shared/Button.module.css";
+	grid-area: exchange;
+  font-size: 1.5em;
+  line-height: 1;
+}

@@ -1,0 +1,20 @@
+.buttonDefaults {
+  font-size: 16px;
+  font-weight: 500;
+	background-color: #223843;
+	border: 2px solid #223843;
+	color: #fff;
+}
+
+.button {
+  composes: buttonDefaults;
+	border-radius: 2px;
+  transition: background-color .6s, border .6s;
+  cursor: pointer;
+}
+
+.button:hover {
+	box-shadow: 0 0 1px 1px rgba(0,0,0,.125);
+	background-color: #1a2930;
+	border-color: #1a2930;
+}
