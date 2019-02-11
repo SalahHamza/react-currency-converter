@@ -6,7 +6,8 @@ class CurrencySelect extends Component {
   }
 
   handleChange = event => {
-    this.setState({ value: event.target.value });
+    const value = event.target.value;
+    this.props.onChange(this.props.name, value);
   }
 
   render() {

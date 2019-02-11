@@ -6,7 +6,13 @@ import CurrencySelect from '../CurrencySelect/CurrencySelect';
 class Converter extends Component {
 
   state = {
-    currencies: []
+    currencies: [],
+    fromCurrency: {
+      value: 'EUR'
+    },
+    toCurrency: {
+      value: 'USD'
+    }
   }
 
   componentDidMount = () => {
@@ -22,8 +28,25 @@ class Converter extends Component {
       .catch(console.error);
   }
 
- render() {
+  handleSelectChange = (name, value) => {
+    this.setState({
+      [name]: { value }
+    })
+  }
 
+  handleSwapClick = () => {
+    this.setState(state => ({
+      fromCurrency: {
+        value: state.toCurrency.value
+      },
+      toCurrency: {
+        value: state.fromCurrency.value
+      }
+    }))
+  }
+
+ render() {
+  const {currencies, fromCurrency, toCurrency} = this.state;
   return (
     <Card>
       <form className={styles.converterGrid}>
@@ -33,23 +56,32 @@ class Converter extends Component {
           type="number" defaultValue="1"
           min="1"
         />
+
         <CurrencySelect
-          currencies={this.state.currencies}
-          value="USD"
+          currencies={currencies}
+          value={fromCurrency.value}
+          key={fromCurrency.value}
           className={styles.fromCurrency}
+          onChange={this.handleSelectChange}
           name="fromCurrency" />
+
         <button
           type="button"
           aria-label="swap"
           className={styles.exchange}
+          onClick={this.handleSwapClick}
         >
           ⮀
         </button>
+
         <CurrencySelect
-          currencies={this.state.currencies}
-          value="EUR"
+          currencies={currencies}
+          value={toCurrency.value}
+          key={toCurrency.value}
           className={styles.toCurrency}
+          onChange={this.handleSelectChange}
           name="toCurrency" />
+
         <button className={styles.convertButton} type="button">convert</button>
       </form>
     </Card>);
