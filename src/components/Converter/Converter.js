@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Converter.module.css';
 import Card from '../Card/Card';
-import CurrencySelect from '../CurrencySelect/CurrencySelect';
+import CurrencySelector from '../CurrencySelector/CurrencySelector';
 
 class Converter extends Component {
 
@@ -46,7 +46,6 @@ class Converter extends Component {
   }
 
  render() {
-  const {currencies, fromCurrency, toCurrency} = this.state;
   return (
     <Card>
       <form className={styles.converterGrid}>
@@ -57,30 +56,12 @@ class Converter extends Component {
           min="1"
         />
 
-        <CurrencySelect
-          currencies={currencies}
-          value={fromCurrency.value}
-          key={fromCurrency.value}
-          className={styles.fromCurrency}
-          onChange={this.handleSelectChange}
-          name="fromCurrency" />
-
-        <button
-          type="button"
-          aria-label="swap"
-          className={styles.exchange}
-          onClick={this.handleSwapClick}
-        >
-          ⮀
-        </button>
-
-        <CurrencySelect
-          currencies={currencies}
-          value={toCurrency.value}
-          key={toCurrency.value}
-          className={styles.toCurrency}
-          onChange={this.handleSelectChange}
-          name="toCurrency" />
+        <CurrencySelector
+          {...this.state}
+          styles={styles}
+          handleSelectChange={this.handleSelectChange}
+          handleSwapClick={this.handleSwapClick}
+        />
 
         <button className={styles.convertButton} type="button">convert</button>
       </form>

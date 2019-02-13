@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class CurrencySelect extends Component {
+class Select extends Component {
   state = {
     value: this.props.value
   }
@@ -38,11 +38,11 @@ class CurrencySelect extends Component {
   }
 }
 
-CurrencySelect.protoTypes = {
+Select.protoTypes = {
   name: PropTypes.string.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.object).isRequired,
   className: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired
 }
 
-export default CurrencySelect;
+export default Select;
