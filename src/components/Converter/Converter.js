@@ -69,7 +69,7 @@ class Converter extends Component {
           handleSwapClick={this.handleSwapClick}
         />
 
-        <button className={styles.convertButton} type="button">convert</button>
+        <button className={styles.convertButton} type="submit">convert</button>
       </form>
     </Card>);
   }
