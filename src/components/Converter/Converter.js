@@ -12,7 +12,8 @@ class Converter extends Component {
     },
     toCurrency: {
       value: 'USD'
-    }
+    },
+    amount: "1"
   }
 
   componentDidMount = () => {
@@ -26,6 +27,10 @@ class Converter extends Component {
         this.setState({ currencies });
       })
       .catch(console.error);
+  }
+
+  handleInputChange = event => {
+    this.setState({ amount: event.target.value });
   }
 
   handleSelectChange = (name, value) => {
@@ -54,6 +59,7 @@ class Converter extends Component {
           className={styles.amount} name="amount"
           type="number" defaultValue="1"
           min="1"
+          onChange={this.handleInputChange}
         />
 
         <CurrencySelector
