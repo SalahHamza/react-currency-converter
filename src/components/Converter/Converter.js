@@ -16,7 +16,7 @@ class Converter extends Component {
   }
 
   componentDidMount = () => {
-    fetch('https://free.currencyconverterapi.com/api/v5/currencies?')
+    fetch(process.env.REACT_APP_CURRENCIES_URL_DEV)
       .then(res => res.json())
       .then(data => {
         const currencies = [];
