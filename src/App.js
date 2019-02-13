@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Converter from './components/Converter/Converter';
+import ConversionsList from './components/ConversionsList/ConversionsList';
 
 class App extends Component {
 
@@ -12,6 +13,7 @@ class App extends Component {
       <Header />
       <Main>
         <Converter />
+        <ConversionsList />
       </Main>
     </div>
     );
