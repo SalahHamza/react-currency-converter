@@ -50,10 +50,15 @@ class Converter extends Component {
     }))
   }
 
+  handleSubmit = event => {
+    // Do something here
+    event.preventDefault();
+  }
+
  render() {
   return (
     <Card>
-      <form className={styles.converterGrid}>
+      <form className={styles.converterGrid} onSubmit={this.handleSubmit}>
         <input
           aria-label="Conversion amount"
           className={styles.amount} name="amount"
