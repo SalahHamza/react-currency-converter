@@ -29,7 +29,7 @@ class App extends Component {
         <Converter
           handleSubmit={this.handleConverterSumbit}
         />
-        <ConversionsList />
+        <ConversionsList conversions={this.state.conversions} />
       </Main>
     </div>
     );

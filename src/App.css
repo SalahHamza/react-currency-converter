@@ -2,5 +2,6 @@
   background-color: #282c34;
   min-height: 100vh;
   max-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
