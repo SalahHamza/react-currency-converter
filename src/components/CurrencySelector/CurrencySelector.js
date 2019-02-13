@@ -12,8 +12,8 @@ const currencySelector = ({
   <>
     <Select
       currencies={currencies}
-      value={fromCurrency.value}
-      key={fromCurrency.value}
+      value={fromCurrency}
+      key={`fromCurrency_${fromCurrency}`}
       className={styles.fromCurrency}
       onChange={handleSelectChange}
       name="fromCurrency"
@@ -30,8 +30,8 @@ const currencySelector = ({
 
     <Select
       currencies={currencies}
-      value={toCurrency.value}
-      key={toCurrency.value}
+      value={toCurrency}
+      key={`toCurrency_${toCurrency}`}
       className={styles.toCurrency}
       onChange={handleSelectChange}
       name="toCurrency"

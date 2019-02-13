@@ -6,13 +6,29 @@ import Converter from './components/Converter/Converter';
 import ConversionsList from './components/ConversionsList/ConversionsList';
 
 class App extends Component {
+  state = {
+    conversions: []
+  }
+
+  handleConverterSumbit = conversion => {
+    this.setState(state => {
+      const conversions = state.conversions
+        .filter(c => c.id !== conversion.id);
+
+      conversions.unshift(conversion);
+
+      return { conversions }
+    });
+  }
 
   render() {
     return (
     <div className='App'>
       <Header />
       <Main>
-        <Converter />
+        <Converter
+          handleSubmit={this.handleConverterSumbit}
+        />
         <ConversionsList />
       </Main>
     </div>
