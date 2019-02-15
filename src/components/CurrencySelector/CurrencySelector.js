@@ -14,7 +14,7 @@ const currencySelector = ({
       currencies={currencies}
       value={fromCurrency}
       key={`fromCurrency_${fromCurrency}`}
-      className={styles.fromCurrency}
+      styles={styles}
       onChange={handleSelectChange}
       name="fromCurrency"
     />
@@ -32,7 +32,7 @@ const currencySelector = ({
       currencies={currencies}
       value={toCurrency}
       key={`toCurrency_${toCurrency}`}
-      className={styles.toCurrency}
+      styles={styles}
       onChange={handleSelectChange}
       name="toCurrency"
     />

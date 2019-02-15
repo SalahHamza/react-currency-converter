@@ -48,15 +48,9 @@
 }
 
 
-.fromCurrency label,
-.toCurrency label{
-	line-height: 2.25;
-	text-align: center;
-	min-width: 50px;
-	display: block;
-	background-color: #223843;
-	color: white;
-	border-radius: 2px 0 0 2px;
+.fromCurrencyLabel,
+.toCurrencyLabel {
+  composes: leftLabel from "../Shared/Label.module.css";
 }
 
 .toCurrency select,

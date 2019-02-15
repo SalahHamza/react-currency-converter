@@ -9,11 +9,8 @@
 	justify-content: center;
 }
 
-.fromResultButton {
-  composes: button from "../Shared/Button.module.css";
-  font-size: 14px;
-	height: 100%;
-	border-radius: 0 2px 2px 0;
+.fromResultLabel {
+  composes: rightLabel from "../Shared/Label.module.css";
 }
 
 
@@ -70,4 +67,11 @@
 
 .close:hover {
 	color: tomato;
+}
+
+.refetchBtn {
+  composes: hoverCircleButton from "../Shared/Button.module.css";
+	position: absolute;
+	right: 12px;
+	margin-top: -16px;
 }

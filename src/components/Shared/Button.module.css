@@ -18,3 +18,19 @@
 	background-color: #1a2930;
 	border-color: #1a2930;
 }
+
+.hoverCircleButton {
+	font-size: 20px;
+	cursor: pointer;
+	font-weight: bold;
+	padding: 6px 10px;
+	background-color: transparent;
+	border-radius: 50%;
+	border: none;
+	transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.hoverCircleButton:hover,
+.hoverCircleButton:focus {
+	background-color: #22384347;
+}

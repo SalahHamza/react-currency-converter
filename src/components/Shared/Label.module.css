@@ -1,0 +1,19 @@
+.labelDefaults {
+  font-size: 16px;
+	line-height: 2.25;
+	text-align: center;
+	min-width: 50px;
+	display: block;
+	background-color: #345667;
+	color: white;
+}
+
+.rightLabel {
+  composes: labelDefaults;
+	border-radius: 0 2px 2px 0;
+}
+
+.leftLabel {
+  composes: labelDefaults;
+  border-radius: 2px 0 0 2px;
+}

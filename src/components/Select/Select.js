@@ -12,7 +12,8 @@ class Select extends Component {
   }
 
   render() {
-    const {currencies, name, className} = this.props;
+    const {currencies, name, styles} = this.props;
+
     const currencyOptions = currencies
       .map((currency, i) => (
         <option
@@ -23,8 +24,13 @@ class Select extends Component {
         </option>
       ));
     return (
-      <div className={className}>
-        <label htmlFor={name}>From</label>
+      <div className={styles[name]}>
+        <label
+          htmlFor={name}
+          className={styles[`${name}Label`]}
+        >
+          From
+        </label>
         <select
           value={this.state.value}
           name={name}
@@ -41,7 +47,7 @@ class Select extends Component {
 Select.protoTypes = {
   name: PropTypes.string.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.object).isRequired,
-  className: PropTypes.string.isRequired,
+  styles: PropTypes.object.isRequired,
   value: PropTypes.string.isRequired
 }
 
