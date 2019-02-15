@@ -10,7 +10,6 @@ const conversionsList = props => {
           <Conversion
             key={c.id}
             conversion={c}
-            deleteConversion={props.deleteConversion}
           />
         ))
       }

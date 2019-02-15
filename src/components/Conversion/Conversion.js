@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './Conversion.module.css';
 import Card from '../Card/Card';
 import { getConversion } from '../../utils';
+import { Context } from '../../App';
 
 class Conversion extends Component {
   state = {
@@ -80,12 +81,16 @@ class Conversion extends Component {
         </div>
 
         <div className={styles.utils}>
-          <button
-            className={styles.close}
-            onClick={this.handleDeleteButtonClick}
-          >
-            🗑
-          </button>
+        <Context>
+          {context => (
+            <button
+              className={styles.close}
+              onClick={() => context.deleteConversion(this.state.id)}
+            >
+              🗑
+            </button>
+          )}
+        </Context>
         </div>
       </Card>
     )

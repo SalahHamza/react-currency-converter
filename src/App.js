@@ -5,6 +5,8 @@ import Main from './components/Main/Main';
 import Converter from './components/Converter/Converter';
 import ConversionsList from './components/ConversionsList/ConversionsList';
 
+const { Provider, Consumer} = React.createContext()
+
 class App extends Component {
   state = {
     conversions: []
@@ -33,17 +35,23 @@ class App extends Component {
     <div className='App'>
       <Header />
       <Main>
-        <Converter
-          addConversion={this.addConversion}
-        />
-        <ConversionsList
-          deleteConversion={this.deleteConversion}
-          conversions={this.state.conversions}
-        />
+        <Provider
+          value={{
+            addConversion: this.addConversion,
+            deleteConversion: this.deleteConversion
+          }}
+        >
+          <Converter/>
+          <ConversionsList
+            conversions={this.state.conversions}
+          />
+        </Provider>
       </Main>
     </div>
     );
   }
 }
+
+export const Context = Consumer;
 
 export default App;

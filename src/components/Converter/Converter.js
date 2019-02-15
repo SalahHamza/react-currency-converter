@@ -4,6 +4,8 @@ import Card from '../Card/Card';
 import CurrencySelector from '../CurrencySelector/CurrencySelector';
 import { getConversion } from '../../utils';
 
+import { Context } from '../../App';
+
 class Converter extends Component {
 
   state = {
@@ -43,13 +45,13 @@ class Converter extends Component {
     }))
   }
 
-  handleSubmit = async event => {
+  handleSubmit = async (callback, event) => {
     event.preventDefault();
 
     const { fromCurrency: fr, toCurrency:  to, amount } = this.state;
     try {
       const conversion = await getConversion(fr, to, amount);
-      this.props.addConversion(conversion);
+      callback(conversion);
     } catch(err) {
       console.log(err);
     }
@@ -58,24 +60,30 @@ class Converter extends Component {
  render() {
   return (
     <Card>
-      <form className={styles.converterGrid} onSubmit={this.handleSubmit}>
-        <input
-          aria-label="Conversion amount"
-          className={styles.amount} name="amount"
-          type="number" defaultValue="1"
-          min="1"
-          onChange={this.handleInputChange}
-        />
+      <Context>
+        {context => {
+          console.log(context);
+          return (
+            <form className={styles.converterGrid} onSubmit={this.handleSubmit.bind(this, context.addConversion)}>
+            <input
+              aria-label="Conversion amount"
+              className={styles.amount} name="amount"
+              type="number" defaultValue="1"
+              min="1"
+              onChange={this.handleInputChange}
+            />
 
-        <CurrencySelector
-          {...this.state}
-          styles={styles}
-          handleSelectChange={this.handleSelectChange}
-          handleSwapClick={this.handleSwapClick}
-        />
+            <CurrencySelector
+              {...this.state}
+              styles={styles}
+              handleSelectChange={this.handleSelectChange}
+              handleSwapClick={this.handleSwapClick}
+            />
 
-        <button className={styles.convertButton} type="submit">convert</button>
-      </form>
+            <button className={styles.convertButton} type="submit">convert</button>
+          </form>
+        )}}
+      </Context>
     </Card>);
   }
 }
