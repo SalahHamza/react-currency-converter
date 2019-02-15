@@ -49,7 +49,7 @@ class Converter extends Component {
     const { fromCurrency: fr, toCurrency:  to, amount } = this.state;
     try {
       const conversion = await getConversion(fr, to, amount);
-      this.props.handleSubmit(conversion);
+      this.props.addConversion(conversion);
     } catch(err) {
       console.log(err);
     }

@@ -10,7 +10,7 @@ class App extends Component {
     conversions: []
   }
 
-  handleConverterSumbit = conversion => {
+  addConversion = conversion => {
     this.setState(state => {
       const conversions = state.conversions
         .filter(c => c.id !== conversion.id);
@@ -27,7 +27,7 @@ class App extends Component {
       <Header />
       <Main>
         <Converter
-          handleSubmit={this.handleConverterSumbit}
+          addConversion={this.addConversion}
         />
         <ConversionsList conversions={this.state.conversions} />
       </Main>
