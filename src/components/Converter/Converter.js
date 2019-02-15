@@ -2,17 +2,7 @@ import React, { Component } from 'react';
 import styles from './Converter.module.css';
 import Card from '../Card/Card';
 import CurrencySelector from '../CurrencySelector/CurrencySelector';
-
-
-const structorConversionData = (data, fr, to, amount) => {
-  const id = `${fr}_${to}`;
-  const date = new Date();
-  // direct rate: fr -> to
-  const dc = data[id]['val'];
-  // reverse rate: to -> fr
-  const rc = data[`${to}_${fr}`]['val'];
-  return {id, date, fr, to, dc, rc, amount};
-}
+import { getConversion } from '../../utils';
 
 class Converter extends Component {
 
@@ -55,17 +45,12 @@ class Converter extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    // Do something here
+
     const { fromCurrency: fr, toCurrency:  to, amount } = this.state;
-    const query = `${fr}_${to},${to}_${fr}`;
-    const url   = `https://free.currencyconverterapi.com/api/v5/convert?q=${query}`;
     try {
-      const res = await fetch(url);
-      const data = await res.json();
-      const conversion = structorConversionData(data.results, fr, to, amount);
+      const conversion = await getConversion(fr, to, amount);
       this.props.handleSubmit(conversion);
     } catch(err) {
-      // handle fetch fail batter
       console.log(err);
     }
   }
