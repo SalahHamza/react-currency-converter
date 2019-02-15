@@ -8,7 +8,7 @@ class Conversion extends Component {
     ...this.props.conversion
   }
 
-  onChange = event =>  {
+  handleAmountInputChange = event =>  {
     this.setState({
       amount: event.target.value
     })
@@ -43,7 +43,7 @@ class Conversion extends Component {
         </button>
         <div className={styles.fromResult}>
           <input
-            onChange={this.onChange}
+            onChange={this.handleAmountInputChange}
             value={amount}
             className={styles.fromResultAmount}
             type="number"
