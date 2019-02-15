@@ -14,7 +14,7 @@ class Conversion extends Component {
     })
   }
 
-  onRefetch = async () => {
+  handleRefetchButtonClick = async () => {
     const {fr, to, amount} = this.state;
     try {
       const conversion = await getConversion(fr, to, amount);
@@ -36,7 +36,7 @@ class Conversion extends Component {
       <Card>
         <button
           type="button"
-          onClick={this.onRefetch}
+          onClick={this.handleRefetchButtonClick}
           className={styles.refetchBtn}
         >
           ⟳
