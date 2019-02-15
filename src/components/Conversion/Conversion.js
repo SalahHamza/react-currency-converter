@@ -26,6 +26,10 @@ class Conversion extends Component {
     }
   }
 
+  handleDeleteButtonClick = () => {
+    this.props.deleteConversion(this.state.id);
+  }
+
   render() {
     const {date, fr, to, dc, rc, amount} = this.state;
     return (
@@ -76,7 +80,12 @@ class Conversion extends Component {
         </div>
 
         <div className={styles.utils}>
-          <span className={styles.close} tabIndex="0">Delete</span>
+          <button
+            className={styles.close}
+            onClick={this.handleDeleteButtonClick}
+          >
+            🗑
+          </button>
         </div>
       </Card>
     )

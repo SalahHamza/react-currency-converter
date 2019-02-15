@@ -21,6 +21,13 @@ class App extends Component {
     });
   }
 
+  deleteConversion = conversionId => {
+    this.setState(state => ({
+      conversions: state.conversions
+        .filter(c => c.id !== conversionId)
+    }));
+  }
+
   render() {
     return (
     <div className='App'>
@@ -29,7 +36,10 @@ class App extends Component {
         <Converter
           addConversion={this.addConversion}
         />
-        <ConversionsList conversions={this.state.conversions} />
+        <ConversionsList
+          deleteConversion={this.deleteConversion}
+          conversions={this.state.conversions}
+        />
       </Main>
     </div>
     );
