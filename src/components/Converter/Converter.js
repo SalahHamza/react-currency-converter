@@ -1,83 +1,78 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './Converter.module.css';
 import Card from '../Card/Card';
 import CurrencySelector from '../CurrencySelector/CurrencySelector';
 import { getConversion } from '../../utils';
 
-class Converter extends Component {
+const { useState, useEffect } = React;
 
-  state = {
-    currencies: [],
-    fromCurrency: 'EUR',
-    toCurrency: 'USD',
-    amount: "1"
-  }
+const converter = props => {
+  const [currencies, setCurrencies] = useState([]);
+  const [fromCurrency, setFromCurrency] = useState('EUR');
+  const [toCurrency, setToCurrency] = useState('USD');
+  const [amount, setAmount] = useState(1);
 
-  componentDidMount = () => {
-    fetch(process.env.REACT_APP_CURRENCIES_URL_DEV)
-      .then(res => res.json())
-      .then(data => {
-        const currencies = [];
-        for(const key in data.results) {
-          currencies.push(data.results[key]);
-        }
-        this.setState({ currencies });
-      })
-      .catch(console.error);
-  }
+  useEffect(
+    () => {
+      fetch(process.env.REACT_APP_CURRENCIES_URL_DEV)
+        .then(res => res.json())
+        .then(data => {
+          const currencies = [];
+          for(const key in data.results) {
+            currencies.push(data.results[key]);
+          }
+          setCurrencies(currencies);
+        })
+        .catch(console.error);
+    },
+    [] // only call this once
+  )
 
-  handleInputChange = event => {
-    this.setState({ amount: event.target.value });
-  }
-
-  handleSelectChange = (name, value) => {
-    this.setState({
-      [name]: value
-    })
-  }
-
-  handleSwapClick = () => {
-    this.setState(state => ({
-      fromCurrency: state.toCurrency,
-      toCurrency: state.fromCurrency
-    }))
-  }
-
-  handleSubmit = async event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    const { fromCurrency: fr, toCurrency:  to, amount } = this.state;
     try {
-      const conversion = await getConversion(fr, to, amount);
-      this.props.addConversion(conversion);
+      const conversion = await getConversion(
+        fromCurrency,
+        toCurrency,
+        amount
+      );
+      props.addConversion(conversion);
     } catch(err) {
       console.log(err);
     }
   }
 
- render() {
+
   return (
     <Card>
-      <form className={styles.converterGrid} onSubmit={this.handleSubmit}>
+      <form className={styles.converterGrid} onSubmit={handleSubmit}>
         <input
           aria-label="Conversion amount"
           className={styles.amount} name="amount"
           type="number" defaultValue="1"
           min="1"
-          onChange={this.handleInputChange}
+          onChange={event => setAmount(event.target.value)}
         />
 
         <CurrencySelector
-          {...this.state}
+          currencies={currencies}
+          fromCurrency={fromCurrency}
+          toCurrency={toCurrency}
+          amount={amount}
           styles={styles}
-          handleSelectChange={this.handleSelectChange}
-          handleSwapClick={this.handleSwapClick}
+          handleFromCurrencyChange={value => setFromCurrency(value)}
+          handleToCurrencyChange={value => setToCurrency(value)}
+          handleSwapClick={() => {
+            setFromCurrency(toCurrency);
+            setToCurrency(fromCurrency);
+          }}
         />
 
         <button className={styles.convertButton} type="submit">convert</button>
       </form>
-    </Card>);
-  }
+    </Card>
+  );
 }
 
-export default Converter;
+export default converter;

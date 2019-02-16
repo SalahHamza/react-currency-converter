@@ -6,7 +6,8 @@ const currencySelector = ({
   fromCurrency,
   toCurrency,
   styles,
-  handleSelectChange,
+  handleFromCurrencyChange,
+  handleToCurrencyChange,
   handleSwapClick
 }) => (
   <>
@@ -15,7 +16,7 @@ const currencySelector = ({
       value={fromCurrency}
       key={`fromCurrency_${fromCurrency}`}
       styles={styles}
-      onChange={handleSelectChange}
+      onChange={handleFromCurrencyChange}
       name="fromCurrency"
     />
 
@@ -33,7 +34,7 @@ const currencySelector = ({
       value={toCurrency}
       key={`toCurrency_${toCurrency}`}
       styles={styles}
-      onChange={handleSelectChange}
+      onChange={handleToCurrencyChange}
       name="toCurrency"
     />
   </>
